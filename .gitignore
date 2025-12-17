@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment variables (Sensitive keys)
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Coverage directory used by testing tools
+coverage/
