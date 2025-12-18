@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Listing = require("./models/listing");
 
 const PORT = 8080
 const MONGO_URL = "mongodb://localhost:27017/yoyo";
@@ -21,6 +22,11 @@ app.get("/", (req, res)=>{
     res.send("Root Node, Landing Page");
 });
 
+app.get("/listings", async (req, res)=>{
+    await Listing.find({}).then((res)=>{
+        console.log(res);
+    });
+});
 
 
 
