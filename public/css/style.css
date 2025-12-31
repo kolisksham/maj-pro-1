@@ -1,0 +1,205 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+    margin: 0 1rem 0 1rem ;
+    font-size: 1.2rem;
+}
+
+.f-info{
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+.card{
+    border: none !important;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 20rem !important; 
+}
+
+.card_title{
+    text-decoration: none !important;
+}
+
+/* Remove underline from links inside card titles */
+.card-title a {
+    text-decoration: none !important;
+    color: inherit;
+}
+.card-title a:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+/* Listings grid layout */
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+    gap: 1.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+}
+
+/* Ensure cards fill grid cells and images have consistent size without distortion */
+.listing-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden; /* ensure rounded corners clip image */
+}
+.listing-card .card-img-top {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* square images at all sizes */
+    height: auto;
+    border-radius: 1rem !important;
+    object-fit: cover !important; /* preserves aspect ratio without squishing (may crop) */
+    display: block;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+}
+.price {
+    margin-top: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Responsive breakpoints (no fixed image heights so aspect-ratio keeps images square) */
+@media (max-width: 1199px) {
+  .listings-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 899px) {
+  .listings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Make the whole card clickable without breaking layout */
+.listings-grid a.listing-link {
+    display: block; /* ensures the anchor behaves like a grid item */
+    color: inherit;
+    text-decoration: none;
+}
+.listings-grid a.listing-link:hover,
+.listings-grid a.listing-link:focus {
+    text-decoration: none;
+}
+/* ensure the inner .card still stretches to fill */
+.listings-grid a.listing-link .card {
+    height: 100%;
+}
+/* visible focus outline for keyboard users */
+.listings-grid a.listing-link:focus-visible {
+    outline: 3px solid rgba(33, 150, 243, 0.6);
+    outline-offset: 4px;
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: 2px solid transparent !important; /* reserve space to avoid layout shift */
+    box-sizing: border-box; /* include border in element size */
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    padding: 0.5rem 1rem; /* ensure consistent clickable area */
+}
+
+.add-btn:hover{
+    color: #fe424d !important;
+    background-color: transparent !important;
+    border-color: #fe424d !important; /* only change color of existing border */
+}
+
+/* #0a58ca */
+
+.edit-btn{
+    background-color: #0a58ca !important;
+    border: 2px solid transparent !important; /* reserve space to avoid layout shift */
+    box-sizing: border-box; /* include border in element size */
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    padding: 0.5rem 1rem; /* ensure consistent clickable area */
+}
+
+.edit-btn:hover{
+    color: #0a58ca !important;
+    background-color: transparent !important;
+    border-color: #0a58ca !important; /* only change color of existing border */
+}
+
+.delete-btn{
+    background-color: #fe424d !important;
+    border: 2px solid transparent !important; /* reserve space to avoid layout shift */
+    box-sizing: border-box; /* include border in element size */
+    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    padding: 0.5rem 1rem; /* ensure consistent clickable area */
+}
+
+.delete-btn:hover{
+    color: #fe424d !important;
+    background-color: transparent !important;
+    border-color: #fe424d !important; /* only change color of existing border */
+}

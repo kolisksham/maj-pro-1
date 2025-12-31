@@ -1,24 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YoYo</title>
-</head>
-<body>
-    <h3>Listing Details: </h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-        <li><%= listing.location %></li>
-        <li><%= listing.country %></li>
-    </ul>
-    <br>
-    <a href="/listings/<%= listing._id %>/edit">Edit</a>
-    <br><br>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button>Delete Listing</button>
-    </form>
-</body>
-</html>
+<%- layout('layouts/boilerplate') %>
+
+<!-- <h3>Listing Details: </h3>
+<img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://via.placeholder.com/800x400' %>" alt="<%= listing.title %>" style="max-width:100%; height:auto;">
+<ul>
+    <li><%= listing.title %></li>
+    <li><%= listing.description %></li>
+    <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
+    <li><%= listing.location %></li>
+    <li><%= listing.country %></li>
+</ul>
+<br>
+<a href="/listings/<%= listing._id %>/edit">Edit</a>
+<br><br>
+<form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+    <button>Delete Listing</button>
+</form> -->
+
+<div class="card mx-auto" style="max-width: 720px; width: 100%; margin-top: 1rem;">
+  <img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://via.placeholder.com/800x400' %>" class="card-img-top" alt="<%= listing.title %>" style="width:100%; height:auto;">
+  <div class="card-body">
+    <h5 class="card-title"><%= listing.title %></h5>
+    <p class="card-text"><%= listing.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">&#8377; <%= listing.price.toLocaleString("en-IN") %>/night</li>
+    <li class="list-group-item"><%= listing.location %></li>
+    <li class="list-group-item"><%= listing.country %></li>
+  </ul>
+  <div class="card-body">
+    <div class="d-flex justify-content-between w-100 align-items-center" style="display:flex; justify-content:space-between; align-items:center;">
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary book-btn">Edit</a>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" style="margin:0;">
+        <button type="submit" class="btn btn-danger delete-btn">Delete Listing</button>
+      </form>
+    </div>
+  </div>
+</div>

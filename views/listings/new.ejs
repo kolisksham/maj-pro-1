@@ -1,38 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Listing</title>
-</head>
-<body>
-    <h2>Create a new listing</h2>
-    <form action="/listings" method="POST">
-        <label for="listing[title]">Title</label>
-        <br>
-        <input type="text" name="listing[title]" id="" placeholder="enter title">
+<%- layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col-8 offset-2">
         <br><br>
-        <label for="listing[description]">Description</label>
-        <br>
-        <textarea name="listing[description]" id="" placeholder="enter description"></textarea>
-        <br><br>
-        <label for="listing[image]">Image URL</label>
-        <br>
-        <input type="text" name="listing[image]" id="" placeholder="enter image link/URL">
-        <br><br>
-        <label for="listing[price]">Price</label>
-        <br>
-        <input type="number" name="listing[price]" id="" placeholder="enter price">
-        <br><br>
-        <label for="listing[location]">Location</label>
-        <br>
-        <input type="text" name="listing[location]" id="" placeholder="enter location">
-        <br><br>
-        <label for="listing[country]">Country</label>
-        <br>
-        <input type="text" name="listing[country]" id="" placeholder="enter country">
-        <br><br>
-        <button>Create</button>
-    </form>    
-</body>
-</html>
+        <h2>Create a new listing</h2>
+        <form action="/listings" method="POST">
+            <div class="mb-3">
+                <label for="listing[title]" class="form-label">Title</label>
+                <input 
+                    type="text" 
+                    name="listing[title]" 
+                    class="form-control" 
+                    placeholder="enter title"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="listing[description]" class="form-label">Description</label>
+                <textarea 
+                    name="listing[description]" 
+                    class="form-control"
+                    placeholder="enter description">
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="listing[image][url]" class="form-label">Image URL</label>
+                <input 
+                    type="text" 
+                    name="listing[image][url]" 
+                    class="form-control"
+                    placeholder="enter image link/URL"
+                />
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="listing[price]" class="form-label">Price</label>
+                    <input 
+                        type="number" 
+                        name="listing[price]" 
+                        class="form-control"
+                        placeholder="enter price"
+                    />
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="listing[country]" class="form-label">Country</label>
+                    <input 
+                        type="text" 
+                        name="listing[country]" 
+                        class="form-control" 
+                        placeholder="enter country"
+                    />
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="listing[location]" class="form-label">Location</label>
+                <input 
+                    type="text" 
+                    name="listing[location]" 
+                    class="form-control" 
+                    placeholder="enter location"
+                />
+            </div>
+            <br>
+            <button class="btn btn-dark add-btn">Create</button>
+            <br><br>
+        </form>
+    </div>
+</div>
