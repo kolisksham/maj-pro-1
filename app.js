@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
+const { listingSchema } = require("./schema");
 
 const PORT = 8080
 const MONGO_URL = "mongodb://localhost:27017/yoyo";
@@ -36,6 +37,8 @@ app.get("/", (req, res)=>{
     res.send("Root Node, Landing Page");
 });
 
+
+
 app.get("/listings", wrapAsync(async (req, res)=>{
     const allListings = await Listing.find({});
     res.render("listings/index", { allListings });
@@ -52,8 +55,10 @@ app.get("/listings/:id", wrapAsync(async (req, res)=>{
 }));
 
 app.post("/listings", wrapAsync(async ( req, res, next)=>{
-    if(!req.body.listing){
-        throw new ExpressError(400, "Bad Request, Send Valid Data for listing!");
+    let result = listingSchema.validate(req.body);
+    console.log(result);
+    if(result.error){
+        throw new ExpressError(400, result.error);
     }
     const newListing = new Listing (req.body.listing);
     await newListing.save();
