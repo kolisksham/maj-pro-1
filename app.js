@@ -4,6 +4,8 @@ const Listing = require("./models/listing");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
+const ExpressError = require("./utils/ExpressError");
 
 const PORT = 8080
 const MONGO_URL = "mongodb://localhost:27017/yoyo";
@@ -34,46 +36,59 @@ app.get("/", (req, res)=>{
     res.send("Root Node, Landing Page");
 });
 
-app.get("/listings", async (req, res)=>{
+app.get("/listings", wrapAsync(async (req, res)=>{
     const allListings = await Listing.find({});
     res.render("listings/index", { allListings });
-});
+}));
 
-app.get("/listings/new", async (req, res)=>{
+app.get("/listings/new", wrapAsync(async (req, res)=>{
     res.render("listings/new")
-}); 
+})); 
 
-app.get("/listings/:id", async (req, res)=>{
+app.get("/listings/:id", wrapAsync(async (req, res)=>{
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/show", { listing });
-});
+}));
 
-app.post("/listings", async (req,res)=>{
+app.post("/listings", wrapAsync(async ( req, res, next)=>{
+    if(!req.body.listing){
+        throw new ExpressError(400, "Bad Request, Send Valid Data for listing!");
+    }
     const newListing = new Listing (req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-});
+}));
 
-app.get("/listings/:id/edit", async( req, res)=>{
+app.get("/listings/:id/edit", wrapAsync(async( req, res)=>{
     let { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit", { listing });
-});
+}));
 
-app.put("/listings/:id", async( req, res)=>{
+app.put("/listings/:id", wrapAsync(async( req, res)=>{
+    if(!req.body.listing){
+        throw new ExpressError(400, "Bad Request, Send Valid Data for listing!");
+    }
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${ id }`);
-});
+}));
 
-app.delete("/listings/:id", async( req, res)=>{
+app.delete("/listings/:id", wrapAsync(async( req, res)=>{
     let { id } = req.params;
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
+}));
+
+app.use((req, res, next)=>{
+    next(new ExpressError(404, "Page not found."));
 });
 
-
+app.use((err, req, res, next)=>{
+    let { statusCode=500, message="Something went wrong." } = err;
+    res.status(statusCode).render("error", {err})
+});
 
 
 
